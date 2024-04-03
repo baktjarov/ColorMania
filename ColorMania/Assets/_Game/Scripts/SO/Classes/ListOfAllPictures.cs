@@ -8,11 +8,13 @@ namespace SO
                     menuName = "Scriptables/" + nameof(ListOfAllPictures))]
     public class ListOfAllPictures : ScriptableObject
     {
-        [SerializeField] private List<Picture> pictures = new();
+        [SerializeField] private List<Picture> _pictures = new();
+
+        public int picturesCount => _pictures.Count;
 
         public Picture GetPicture(int index)
         {
-            if (index >= pictures.Count)
+            if (index >= _pictures.Count)
             {
                 index = 0;
             }
@@ -22,7 +24,7 @@ namespace SO
                 index = 0;
             }
 
-            return pictures[index];
+            return _pictures[index];
         }
     }
 }

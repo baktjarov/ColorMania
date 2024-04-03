@@ -32,6 +32,11 @@ namespace UIElements
             InjectService.Inject(this);
         }
 
+        private void OnDestroy()
+        {
+            UnsubscribeFromEvents();
+        }
+
         public void SetPenDTO(Pen_Data penDTO)
         {
             _penData = penDTO;
@@ -55,11 +60,13 @@ namespace UIElements
 
         private void UnsubscribeFromEvents()
         {
-            if (_penData == null) { return; }
+            _button?.onClick.RemoveListener(ChoosePen);
+            _button?.onClick.RemoveListener(UnlockPen);
 
-            _button.onClick.RemoveListener(ChoosePen);
-            _button.onClick.RemoveListener(UnlockPen);
-            _onPenSelected -= OnPenSelected;
+            if (_onPenSelected != null)
+            {
+                _onPenSelected -= OnPenSelected;
+            }
         }
 
         private void UpdateUI()

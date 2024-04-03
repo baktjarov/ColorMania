@@ -31,7 +31,15 @@ namespace GameStates
 
                 _drawable = UnityEngine.Object.FindObjectOfType<Drawable>(true);
 
-                _picture = UnityEngine.Object.Instantiate(_listOfAllPictures.GetPicture(_levelSaveService.GetCurrentLevel()));
+                int pictureIndex = _levelSaveService.GetCurrentLevel();
+
+                if (pictureIndex >= _listOfAllPictures.picturesCount)
+                {
+                    _levelSaveService.SetLevel(0);
+                    _levelSaveService.GetCurrentLevel();
+                }
+
+                _picture = UnityEngine.Object.Instantiate(_listOfAllPictures.GetPicture(pictureIndex));
                 _drawable.Initialize(_picture?.pictureSpriteRenderer);
             });
         }
