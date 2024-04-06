@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0acbe5dbad62375d974cf7489ec5cf5, type: 3}
   m_Name: ListOfAllPictures
   m_EditorClassIdentifier: 
-  pictures:
-  - {fileID: 375555808521633318, guid: d78f2ecf7c366d40e9a5ccd4a84ffc8f, type: 3}
+  _pictures:
+  - {fileID: 375555808521633318, guid: d2dca1fe59c8c8140aa20cc073016d7c, type: 3}
+  - {fileID: 375555808521633318, guid: 23b6192f67ea37043a18721e6abfdab3, type: 3}
   - {fileID: 2592437485992454519, guid: a976a98588de228e4b16c01aa8ac16fb, type: 3}
+  - {fileID: 375555808521633318, guid: d78f2ecf7c366d40e9a5ccd4a84ffc8f, type: 3}
+  - {fileID: 375555808521633318, guid: 43652c8a312bff044bb0885a041c1be3, type: 3}
