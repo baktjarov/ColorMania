@@ -1,6 +1,5 @@
 ﻿using DataClasses;
 using Interfaces;
-using SO;
 using System;
 
 namespace Services
@@ -18,7 +17,7 @@ namespace Services
 
         public void Unlock(PenDTO pen, Action onUnlocked)
         {
-            _adsShower.ShowRewarded((rewarded) =>
+            _adsShower.ShowRewarded(() =>
             {
                 OnRewarded(pen, onUnlocked);
             });

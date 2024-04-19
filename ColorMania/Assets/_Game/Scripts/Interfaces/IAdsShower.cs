@@ -1,5 +1,4 @@
 using System;
-using GoogleMobileAds.Api;
 
 namespace Interfaces
 {
@@ -8,6 +7,6 @@ namespace Interfaces
         public void ShowBanner();
         public void HideBanner();
         public void ShowInterstitial();
-        public void ShowRewarded(Action<Reward> onRewarded);
+        public void ShowRewarded(Action onRewarded);
     }
 }

@@ -1,7 +1,5 @@
-﻿using GoogleMobileAds.Api;
+﻿using Interfaces;
 using System;
-using Interfaces;
-using UnityEngine;
 
 namespace Services
 {
@@ -11,18 +9,18 @@ namespace Services
         private string _interstitialID = "ca-app-pub-1922629388317265/1016013247";
         private string _rewardedID = "ca-app-pub-1922629388317265/1051726162";
 
-        private BannerView _bannerView;
-        private InterstitialAd _interstitialAd;
-        private RewardedAd _rewardedAd;
+        //private BannerView _bannerView;
+        //private InterstitialAd _interstitialAd;
+        //private RewardedAd _rewardedAd;
 
         public void Initialize()
         {
-            LoadBanner();
+            /*LoadBanner();
             LoadInterstitial();
-            LoadRewarded();
+            LoadRewarded();*/
         }
 
-        private void LoadBanner()
+        /*private void LoadBanner()
         {
             _bannerView = new BannerView(_bannerID, AdSize.Banner, AdPosition.Bottom);
             _bannerView.LoadAd(new AdRequest());
@@ -48,36 +46,38 @@ namespace Services
                 if (loadAdError != null) { Debug.LogError(loadAdError.GetMessage()); }
                 _rewardedAd = rewardedAd;
             }
-        }
+        }*/
 
         public void ShowBanner()
         {
-            _bannerView?.Show();
+            //_bannerView?.Show();
         }
 
         public void HideBanner()
         {
-            _bannerView?.Hide();
+            //_bannerView?.Hide();
         }
 
         public void ShowInterstitial()
         {
-            if (_interstitialAd != null && _interstitialAd.CanShowAd() == true)
+            /*if (_interstitialAd != null && _interstitialAd.CanShowAd() == true)
             {
                 _interstitialAd.Show();
-            }
+            }*/
         }
 
-        public void ShowRewarded(Action<Reward> onRewarded)
+        public void ShowRewarded(Action onRewarded)
         {
-            if (_rewardedAd != null && _rewardedAd.CanShowAd() == true)
+            /*if (_rewardedAd != null && _rewardedAd.CanShowAd() == true)
             {
                 _rewardedAd.Show((rewarded) =>
                 {
                     onRewarded?.Invoke(rewarded);
                     LoadRewarded();
                 });
-            }
+            }*/
+
+            onRewarded?.Invoke();
         }
     }
 }
