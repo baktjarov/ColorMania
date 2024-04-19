@@ -24,6 +24,6 @@ AssetOrigin:
   serializedVersion: 1
   productId: 183370
   packageName: Feel
-  packageVersion: 3.15
-  assetPath: Assets/Feel/NiceVibrations/HapticSamples/ApplicationUX/Button1.wav
-  uploadId: 621683
+  packageVersion: 3.16
+  assetPath: Assets/_Game/Resources/AudioClips/Button1.wav
+  uploadId: 642159
