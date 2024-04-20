@@ -1,7 +1,6 @@
-using System;
-using System.Collections.Concurrent;
+using DataClasses;
 using System.Linq;
-using System.Threading;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Gameplay
@@ -10,7 +9,7 @@ namespace Gameplay
     {
         public Color32[] currentPixelsColorArray { get; private set; }
 
-        [field: SerializeField] public float percentageOfColoring { get; private set; }
+        [field: SerializeField] public ObservableValue<float> percentageOfColoring { get; private set; } = new();
 
         [Header("Settings")]
         [SerializeField] private LayerMask _drawingLayers;
@@ -33,14 +32,7 @@ namespace Gameplay
         private Rect _drawableSpriteRect;
         private Bounds _drawableSpriteBounds;
 
-        private ConcurrentQueue<Action> _threadActions = new ConcurrentQueue<Action>();
-
-        private Thread _paintThread;
-        private Thread _calculateDrawPercentageThread;
-
-        private CancellationTokenSource _destroyCTS;
-
-        public void Initialize(SpriteRenderer spriteRenderer)
+        public async void Initialize(SpriteRenderer spriteRenderer)
         {
             _originalDrawableSprite = spriteRenderer.sprite;
 
@@ -62,36 +54,11 @@ namespace Gameplay
             spriteRenderer.material = materialInstance;
 
             _isActive = true;
-        }
 
-        private void OnEnable()
-        {
-            _destroyCTS = new CancellationTokenSource();
-
-            _paintThread = new Thread(() =>
+            while (_isActive == true)
             {
-                while (_destroyCTS.IsCancellationRequested == false)
-                {
-                    if (_isActive == false) continue;
-
-                    if (_threadActions.TryDequeue(out Action threadAction))
-                    {
-                        threadAction?.Invoke();
-                    }
-                }
-            });
-
-            _calculateDrawPercentageThread = new Thread(() =>
-            {
-                while (_destroyCTS.IsCancellationRequested == false)
-                {
-                    if (_isActive == false) continue;
-                    UpdateColorDifferencePercentage();
-                }
-            });
-
-            _paintThread.Start();
-            _calculateDrawPercentageThread.Start();
+                percentageOfColoring?.SetValue(await UpdateColorDifferencePercentage());
+            }
         }
 
         private void OnDisable()
@@ -99,16 +66,10 @@ namespace Gameplay
             _isActive = false;
         }
 
-        private void OnDestroy()
-        {
-            _destroyCTS.Cancel();
-
-            _paintThread?.Abort();
-            _calculateDrawPercentageThread?.Abort();
-        }
-
         private void Update()
         {
+            if (_isActive == false) { return; }
+
             bool mouseDown = Input.GetMouseButton(0);
 
             if (mouseDown)
@@ -121,10 +82,7 @@ namespace Gameplay
                     Vector3 transformLocalScale = transform.localScale;
                     Vector3 localPosition = transform.InverseTransformPoint(mouseWorldPositioni);
 
-                    _threadActions.Enqueue(() =>
-                    {
-                        Draw(transformLocalScale, localPosition);
-                    });
+                    Draw(transformLocalScale, localPosition);
                 }
                 else
                 {
@@ -135,11 +93,8 @@ namespace Gameplay
             {
                 _previousDragPosition = Vector2.zero;
             }
-        }
 
-        private void FixedUpdate()
-        {
-            if (_isActive == true) { ApplyMarkedPixelChanges(); }
+            ApplyMarkedPixelChanges();
         }
 
         public void ApplyMarkedPixelChanges()
@@ -227,34 +182,37 @@ namespace Gameplay
             return pixel_pos;
         }
 
-        private void UpdateColorDifferencePercentage()
+        public int currentIndex = 0;
+
+        private async Task<float> UpdateColorDifferencePercentage()
         {
             if (currentPixelsColorArray == null || currentPixelsColorArray == null)
             {
                 Debug.LogError("Pixel arrays not initialized.");
-                return;
+                return 0;
             }
 
             Color32[] currentPixelsColorArray_OnlyNonTransparent = currentPixelsColorArray.Where(x => x.a > _minimumPixelTransparency).ToArray();
 
             int differentPixels = 0;
 
-            for (int i = 0; i < currentPixelsColorArray_OnlyNonTransparent.Length; i++)
+            await Task.Run(() =>
             {
-                Color originalPixel = currentPixelsColorArray_OnlyNonTransparent[i];
-
-                if (originalPixel != _unpaintedColour)
+                for (int i = 0; i < currentPixelsColorArray_OnlyNonTransparent.Length; i++)
                 {
-                    differentPixels++;
+                    currentIndex = i;
+                    if (_isActive == false) { return; }
+
+                    Color originalPixel = currentPixelsColorArray_OnlyNonTransparent[i];
+
+                    if (originalPixel != _unpaintedColour)
+                    {
+                        differentPixels++;
+                    }
                 }
-            }
+            });
 
-            percentageOfColoring = (float)differentPixels / (float)currentPixelsColorArray_OnlyNonTransparent.Length * 100f;
-        }
-
-        public float GetPercentageOfColoring()
-        {
-            return percentageOfColoring;
+            return (float)differentPixels / (float)currentPixelsColorArray_OnlyNonTransparent.Length * 100f;
         }
 
         public void SetPenColor(Color color)

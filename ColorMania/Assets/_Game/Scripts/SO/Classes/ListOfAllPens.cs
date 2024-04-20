@@ -24,6 +24,9 @@ namespace SO
         public Pen_Data GetPen(string id)
         {
             Pen_Data selectedPen = pens.FirstOrDefault((pen) => pen.penID == id);
+
+            if (selectedPen == null) { selectedPen = pens.FirstOrDefault(pen => pen.isDefault == true); }
+
             return selectedPen;
         }
     }
