@@ -2,7 +2,6 @@ using Gameplay;
 using GameStates.Interfaces;
 using Interfaces;
 using Services;
-using SO;
 using Zenject;
 
 namespace GameStates
@@ -11,19 +10,22 @@ namespace GameStates
     {
         [Inject] private SceneLoader _sceneLoader;
         [Inject] private IGameStatesManager _gameStatesManager;
-        [Inject] private ListOfAllPictures _listOfAllPictures;
         [Inject] private ILevelSaveService _levelSaveService;
 
         private Drawable _drawable;
         private Picture _picture;
 
+        private Gameplay_GameState_Model _model;
         private Gameplay_GameState_ViewsManager _viewsManager;
 
         public void Enter()
         {
             _sceneLoader?.LoadScene("Gameplay", () =>
             {
-                _viewsManager = new Gameplay_GameState_ViewsManager();
+                _model = new Gameplay_GameState_Model();
+                _model.Initialize();
+
+                _viewsManager = new Gameplay_GameState_ViewsManager(_model);
                 _viewsManager.Initialize();
 
                 _viewsManager.onMainMenuClicked += EnterMainMenuState;
@@ -33,14 +35,16 @@ namespace GameStates
 
                 int pictureIndex = _levelSaveService.GetCurrentLevel();
 
-                if (pictureIndex >= _listOfAllPictures.picturesCount)
+                if (pictureIndex >= _model.listOfAllPictures.picturesCount)
                 {
                     _levelSaveService.SetLevel(0);
                     _levelSaveService.GetCurrentLevel();
                 }
 
-                _picture = UnityEngine.Object.Instantiate(_listOfAllPictures.GetPicture(pictureIndex));
+                _picture = UnityEngine.Object.Instantiate(_model.listOfAllPictures.GetPicture(pictureIndex));
                 _drawable.Initialize(_picture?.pictureSpriteRenderer);
+
+                _model.colorPicker.Initialize(_picture.colors);
             });
         }
 

@@ -119,6 +119,50 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &11083932
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 11083933}
+  - component: {fileID: 11083934}
+  m_Layer: 0
+  m_Name: ColorPicker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &11083933
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 11083932}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &11083934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 11083932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2178cc93ad632fd4a9477b07434502a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &136067109
 GameObject:
   m_ObjectHideFlags: 0
@@ -178,10 +222,10 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
+  far clip plane: 11
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 6
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -302,7 +346,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5c8ecf0deef6e6f98492641d401b436, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <percentageOfColoring>k__BackingField: 0
   _drawingLayers:
     serializedVersion: 2
     m_Bits: 8
@@ -312,6 +355,7 @@ MonoBehaviour:
   _drawBetweenSpace: 2
   _minimumPixelTransparency: 0.9
   _pen: {fileID: 1203274906}
+  currentIndex: 0
 --- !u!61 &145679555
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -604,6 +648,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _drawable: {fileID: 145679554}
   _pen: {fileID: 1203274907}
+  _colorPickService: {fileID: 11083934}
 --- !u!114 &1733310582
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -645,3 +690,4 @@ SceneRoots:
   - {fileID: 145679553}
   - {fileID: 1203274905}
   - {fileID: 1733310580}
+  - {fileID: 11083933}

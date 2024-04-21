@@ -57,9 +57,53 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3811831942222321361}
     - target: {fileID: 5114258297921471119, guid: 8f44c02220f57c5ecaf8f17425216890, type: 3}
+      propertyPath: <colors>k__BackingField.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5114258297921471119, guid: 8f44c02220f57c5ecaf8f17425216890, type: 3}
       propertyPath: <pictureSpriteRenderer>k__BackingField
       value: 
       objectReference: {fileID: 1756878620758753350}
+    - target: {fileID: 5114258297921471119, guid: 8f44c02220f57c5ecaf8f17425216890, type: 3}
+      propertyPath: <colors>k__BackingField.Array.data[0].a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5114258297921471119, guid: 8f44c02220f57c5ecaf8f17425216890, type: 3}
+      propertyPath: <colors>k__BackingField.Array.data[0].b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5114258297921471119, guid: 8f44c02220f57c5ecaf8f17425216890, type: 3}
+      propertyPath: <colors>k__BackingField.Array.data[0].g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5114258297921471119, guid: 8f44c02220f57c5ecaf8f17425216890, type: 3}
+      propertyPath: <colors>k__BackingField.Array.data[0].r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5114258297921471119, guid: 8f44c02220f57c5ecaf8f17425216890, type: 3}
+      propertyPath: <colors>k__BackingField.Array.data[1].a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5114258297921471119, guid: 8f44c02220f57c5ecaf8f17425216890, type: 3}
+      propertyPath: <colors>k__BackingField.Array.data[1].b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5114258297921471119, guid: 8f44c02220f57c5ecaf8f17425216890, type: 3}
+      propertyPath: <colors>k__BackingField.Array.data[1].g
+      value: 0.8806343
+      objectReference: {fileID: 0}
+    - target: {fileID: 5114258297921471119, guid: 8f44c02220f57c5ecaf8f17425216890, type: 3}
+      propertyPath: <colors>k__BackingField.Array.data[1].r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5114258297921471119, guid: 8f44c02220f57c5ecaf8f17425216890, type: 3}
+      propertyPath: <colors>k__BackingField.Array.data[2].a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5114258297921471119, guid: 8f44c02220f57c5ecaf8f17425216890, type: 3}
+      propertyPath: <colors>k__BackingField.Array.data[2].r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5901147143446379817, guid: 8f44c02220f57c5ecaf8f17425216890, type: 3}
       propertyPath: m_Size.x
       value: 5.12

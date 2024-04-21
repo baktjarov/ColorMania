@@ -1,7 +1,9 @@
 using DataClasses;
+using Interfaces;
 using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
+using Zenject;
 
 namespace Gameplay
 {
@@ -32,6 +34,8 @@ namespace Gameplay
         private Rect _drawableSpriteRect;
         private Bounds _drawableSpriteBounds;
 
+        [Inject] private IColorPicker _colorPicker;
+
         public async void Initialize(SpriteRenderer spriteRenderer)
         {
             _originalDrawableSprite = spriteRenderer.sprite;
@@ -61,9 +65,16 @@ namespace Gameplay
             }
         }
 
+        private void OnEnable()
+        {
+            _colorPicker.onColorPicked += SetPenColor;
+        }
+
         private void OnDisable()
         {
             _isActive = false;
+
+            _colorPicker.onColorPicked -= SetPenColor;
         }
 
         private void Update()
@@ -82,7 +93,7 @@ namespace Gameplay
                     Vector3 transformLocalScale = transform.localScale;
                     Vector3 localPosition = transform.InverseTransformPoint(mouseWorldPositioni);
 
-                    Draw(transformLocalScale, localPosition);
+                    if (_penColour != IColorPicker.noColor) { Draw(transformLocalScale, localPosition); }
                 }
                 else
                 {
@@ -215,7 +226,7 @@ namespace Gameplay
             return (float)differentPixels / (float)currentPixelsColorArray_OnlyNonTransparent.Length * 100f;
         }
 
-        public void SetPenColor(Color color)
+        private void SetPenColor(Color color)
         {
             _penColour = color;
         }

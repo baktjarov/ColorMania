@@ -1,9 +1,7 @@
-using System;
 using Gameplay;
 using Services;
-using SO;
+using System;
 using UI.Views;
-using Zenject;
 using Object = UnityEngine.Object;
 
 namespace GameStates
@@ -13,29 +11,34 @@ namespace GameStates
         public Action onMainMenuClicked;
         public Action onNextClicked;
 
-        [Inject] private ListOfAllViews _listOfAllViews;
+        private Gameplay_GameState_Model _model;
 
         private Gameplay_View _gameplayView;
         private Pause_View _pauseView;
         private Win_View _winView;
         private Drawable _drawable;
 
+        public Gameplay_GameState_ViewsManager(Gameplay_GameState_Model model)
+        {
+            _model = model;
+        }
+
         public void Initialize()
         {
             InjectService.Inject(this);
 
-            Gameplay_View gameplay_View_Prefab = _listOfAllViews.GetView<Gameplay_View>();
+            Gameplay_View gameplay_View_Prefab = _model.listOfAllViews.GetView<Gameplay_View>();
             _gameplayView = Object.Instantiate(gameplay_View_Prefab);
 
-            Pause_View pause_View_Prefab = _listOfAllViews.GetView<Pause_View>();
+            Pause_View pause_View_Prefab = _model.listOfAllViews.GetView<Pause_View>();
             _pauseView = Object.Instantiate(pause_View_Prefab);
 
-            Win_View win_View_Prefab = _listOfAllViews.GetView<Win_View>();
+            Win_View win_View_Prefab = _model.listOfAllViews.GetView<Win_View>();
             _winView = Object.Instantiate(win_View_Prefab);
 
             _drawable = Object.FindObjectOfType<Drawable>();
 
-            _gameplayView.Construct(_pauseView, _winView, _drawable);
+            _gameplayView.Construct(_pauseView, _winView, _drawable, _model.colorPicker);
             _pauseView.SetOpenOnCloseView(_gameplayView);
 
             _gameplayView.Open();

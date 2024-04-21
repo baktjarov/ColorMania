@@ -69,7 +69,6 @@ namespace Gameplay
             PenSkin penSkinsPrefab = _listOfAllPens.GetPen(_penSelecter.GetSelectedPen().penID).targetPen;
             _penSkin = UnityEngine.Object.Instantiate(penSkinsPrefab);
             _penSkin.transform.SetParent(transform);
-            _drawable.SetPenColor(_penSkin.penColor);
         }
     }
 }
