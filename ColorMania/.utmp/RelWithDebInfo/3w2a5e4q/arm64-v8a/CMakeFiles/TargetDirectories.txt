@@ -1,0 +1,5 @@
+D:/Git/ColorMania/ColorMania/.utmp/RelWithDebInfo/3w2a5e4q/arm64-v8a/CMakeFiles/edit_cache.dir
+D:/Git/ColorMania/ColorMania/.utmp/RelWithDebInfo/3w2a5e4q/arm64-v8a/CMakeFiles/rebuild_cache.dir
+D:/Git/ColorMania/ColorMania/.utmp/RelWithDebInfo/3w2a5e4q/arm64-v8a/FramePacing/CMakeFiles/swappywrapper.dir
+D:/Git/ColorMania/ColorMania/.utmp/RelWithDebInfo/3w2a5e4q/arm64-v8a/FramePacing/CMakeFiles/edit_cache.dir
+D:/Git/ColorMania/ColorMania/.utmp/RelWithDebInfo/3w2a5e4q/arm64-v8a/FramePacing/CMakeFiles/rebuild_cache.dir
