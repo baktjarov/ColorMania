@@ -7,9 +7,9 @@ namespace Services
 {
     public class AdsShower_AdMob : IAdsShower
     {
-        private string _bannerID = "ca-app-pub-1922629388317265/4922117595";
-        private string _interstitialID = "ca-app-pub-1922629388317265/1016013247";
-        private string _rewardedID = "ca-app-pub-1922629388317265/1051726162";
+        private string _bannerID = "ca-app-pub-3940256099942544/6300978111";
+        private string _interstitialID = "ca-app-pub-3940256099942544/1033173712";
+        private string _rewardedID = "ca-app-pub-3940256099942544/5224354917";
 
         private BannerView _bannerView;
         private InterstitialAd _interstitialAd;
@@ -78,8 +78,6 @@ namespace Services
                     LoadRewarded();
                 });
             }
-
-            onRewarded?.Invoke();
         }
     }
 }
